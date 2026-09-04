@@ -1,0 +1,29 @@
+graph TD
+    %% Estilos de los nodos
+    classDef celeste fill:#A9D0F5,stroke:#333,stroke-width:2px,color:#000;
+    classDef verde fill:#A9F5A9,stroke:#333,stroke-width:2px,color:#000;
+    classDef amarillo fill:#F5DA81,stroke:#333,stroke-width:2px,color:#000;
+    classDef rojo fill:#F5A9A9,stroke:#333,stroke-width:2px,color:#000;
+    classDef decision fill:#FFFFFF,stroke:#333,stroke-width:2px,shape:diamond;
+
+    A[Evaluación Matutina del Atleta] --> B{Filtro 1: <br>¿Lesión o Dolor ≤ 2?}
+    
+    B -- SÍ --> C[CELESTE / DESCANSO<br>Veto Estructural]:::celeste
+    B -- NO --> D{Filtro 2: <br>¿HRV/FCR alterada ≥ 3 días?}
+    
+    D -- SÍ --> C
+    D -- NO --> E{Filtro 3: <br>¿Marcador Fisiológico Alterado?}
+    
+    E -- SÍ --> F{¿Percepción Subjetiva<br>IRS Empeora?}
+    F -- SÍ --> C
+    F -- NO --> G[VERDE / CELESTE<br>Carga Ligera]:::verde
+    
+    E -- NO --> H{¿Percepción Subjetiva<br>IRS Empeora?}
+    H -- SÍ --> G
+    H -- NO --> I{Filtro 4: <br>¿Ayer fue sesión ROJA?}
+    
+    I -- SÍ --> J[AMARILLO<br>Veto a Doble Roja]:::amarillo
+    I -- NO --> K{¿2 días previos AMARILLOS?}
+    
+    K -- SÍ --> G
+    K -- NO --> L[ROJO / AMARILLO<br>Sincronización Perfecta]:::rojo
